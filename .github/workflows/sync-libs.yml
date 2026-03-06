@@ -1,5 +1,10 @@
 name: sync-libraries
 
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 3 * * 1"
+
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -32,5 +37,4 @@ jobs:
           git diff --cached --quiet || git commit -m "chore: sync libraries"
 
       - name: Push changes
-        run: |
-          git push
+        run: git push
