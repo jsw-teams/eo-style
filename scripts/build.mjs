@@ -23,7 +23,6 @@ async function readJson(filePath) {
   }
 
   const trimmed = String(raw).trim();
-
   if (!trimmed) {
     throw new Error(`JSON 文件为空: ${normalizeSlashes(path.relative(rootDir, filePath))}`);
   }
@@ -31,9 +30,7 @@ async function readJson(filePath) {
   try {
     return JSON.parse(trimmed);
   } catch (err) {
-    throw new Error(
-      `JSON 解析失败: ${normalizeSlashes(path.relative(rootDir, filePath))}\n${err.message}`
-    );
+    throw new Error(`JSON 解析失败: ${normalizeSlashes(path.relative(rootDir, filePath))}\n${err.message}`);
   }
 }
 
@@ -378,10 +375,7 @@ async function main() {
     JSON.stringify({
       siteUrl: config.siteUrl,
       siteName: config.siteName,
-      siteDescription: config.siteDescription,
-      siteKeywords: config.siteKeywords || [],
-      formUrl: config.formUrl || "",
-      footerText: config.footerText || ""
+      formUrl: config.formUrl || ""
     }, null, 2),
     "utf8"
   );
@@ -389,12 +383,6 @@ async function main() {
   await fs.writeFile(
     path.join(dataDir, "libraries.json"),
     JSON.stringify({
-      generatedAt: new Date().toISOString(),
-      site: {
-        name: config.siteName,
-        description: config.siteDescription,
-        url: config.siteUrl
-      },
       libraries
     }, null, 2),
     "utf8"
@@ -403,7 +391,6 @@ async function main() {
   await fs.writeFile(
     path.join(dataDir, "search.json"),
     JSON.stringify({
-      generatedAt: new Date().toISOString(),
       items: searchIndex
     }, null, 2),
     "utf8"

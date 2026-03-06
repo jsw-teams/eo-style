@@ -1,0 +1,125 @@
+{
+  "items": [
+    {
+      "name": "artalk",
+      "title": "Artalk",
+      "description": "Artalk 静态资源镜像",
+      "keywords": [
+        "artalk",
+        "comments",
+        "css",
+        "js"
+      ],
+      "license": "MIT",
+      "latestVersion": "2.9.1",
+      "detailPage": "/libraries/artalk/",
+      "featured": false
+    },
+    {
+      "name": "disqusjs",
+      "title": "DisqusJS",
+      "description": "DisqusJS 静态资源镜像",
+      "keywords": [
+        "disqus",
+        "comments",
+        "disqusjs"
+      ],
+      "license": "MIT",
+      "latestVersion": "3.2.1",
+      "detailPage": "/libraries/disqusjs/",
+      "featured": false
+    },
+    {
+      "name": "hexo-theme-cards",
+      "title": "Hexo Theme Cards",
+      "description": "Hexo Theme Cards 静态资源镜像",
+      "keywords": [
+        "hexo",
+        "theme",
+        "cards",
+        "style",
+        "darkmode",
+        "local-search",
+        "b2t"
+      ],
+      "license": "MIT",
+      "latestVersion": "1.5.2",
+      "detailPage": "/libraries/hexo-theme-cards/",
+      "featured": true
+    },
+    {
+      "name": "highlight.js",
+      "title": "highlight.js",
+      "description": "highlight.js 静态资源镜像",
+      "keywords": [
+        "highlight.js",
+        "highlight",
+        "code",
+        "css"
+      ],
+      "license": "BSD-3-Clause",
+      "latestVersion": "11.11.1",
+      "detailPage": "/libraries/highlight.js/",
+      "featured": true
+    },
+    {
+      "name": "minivaline",
+      "title": "MiniValine",
+      "description": "MiniValine 静态资源镜像",
+      "keywords": [
+        "minivaline",
+        "comments",
+        "blog"
+      ],
+      "license": "MIT",
+      "latestVersion": "6.1.0",
+      "detailPage": "/libraries/minivaline/",
+      "featured": false
+    },
+    {
+      "name": "prismjs",
+      "title": "Prism.js",
+      "description": "Prism.js 静态资源镜像",
+      "keywords": [
+        "prismjs",
+        "prism",
+        "highlight",
+        "code",
+        "css"
+      ],
+      "license": "MIT",
+      "latestVersion": "1.30.0",
+      "detailPage": "/libraries/prismjs/",
+      "featured": true
+    },
+    {
+      "name": "valine",
+      "title": "Valine",
+      "description": "Valine 静态资源镜像",
+      "keywords": [
+        "valine",
+        "comments",
+        "blog"
+      ],
+      "license": "MIT",
+      "latestVersion": "1.5.3",
+      "detailPage": "/libraries/valine/",
+      "featured": false
+    },
+    {
+      "name": "vanilla-lazyload",
+      "title": "vanilla-lazyload",
+      "description": "vanilla-lazyload 静态资源镜像",
+      "keywords": [
+        "lazyload",
+        "image",
+        "performance",
+        "frontend"
+      ],
+      "license": "MIT",
+      "latestVersion": "19.1.3",
+      "detailPage": "/libraries/vanilla-lazyload/",
+      "featured": false
+    }
+  ]
+}
