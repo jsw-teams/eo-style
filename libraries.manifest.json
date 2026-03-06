@@ -8,7 +8,7 @@
       "license": "MIT",
       "keywords": ["hexo", "theme", "cards", "style", "darkmode", "local-search", "b2t"],
       "featured": true,
-      "versions": "all",
+      "versions": "latest-8",
       "include": [
         "dist/**/*.css",
         "dist/**/*.js"
@@ -22,7 +22,7 @@
       "license": "BSD-3-Clause",
       "keywords": ["highlight.js", "highlight", "code", "css"],
       "featured": true,
-      "versions": "all",
+      "versions": "latest-8",
       "include": [
         "styles/**/*.css"
       ]
@@ -35,7 +35,7 @@
       "license": "MIT",
       "keywords": ["prismjs", "prism", "highlight", "code", "css"],
       "featured": true,
-      "versions": "all",
+      "versions": "latest-8",
       "include": [
         "themes/**/*.css"
       ]
@@ -48,7 +48,7 @@
       "license": "MIT",
       "keywords": ["lazyload", "image", "performance", "frontend"],
       "featured": false,
-      "versions": "all",
+      "versions": "latest-8",
       "include": [
         "**/*.js",
         "**/*.mjs"
@@ -68,7 +68,7 @@
       "license": "MIT",
       "keywords": ["disqus", "comments", "disqusjs"],
       "featured": false,
-      "versions": "all",
+      "versions": "latest-8",
       "include": [
         "**/*.css",
         "**/*.js",
@@ -83,7 +83,7 @@
       "license": "MIT",
       "keywords": ["valine", "comments", "blog"],
       "featured": false,
-      "versions": "all",
+      "versions": "latest-8",
       "include": [
         "**/*.js",
         "**/*.mjs"
@@ -97,7 +97,7 @@
       "license": "MIT",
       "keywords": ["minivaline", "comments", "blog"],
       "featured": false,
-      "versions": "all",
+      "versions": "latest-8",
       "include": [
         "**/*.js",
         "**/*.mjs",
@@ -112,7 +112,7 @@
       "license": "MIT",
       "keywords": ["artalk", "comments", "css", "js"],
       "featured": false,
-      "versions": "all",
+      "versions": "latest-8",
       "include": [
         "**/*.css",
         "**/*.js",
@@ -122,12 +122,12 @@
     {
       "name": "wildfire",
       "title": "Wildfire",
-      "package": "wildfirejs",
+      "package": "wildfire",
       "homepage": "https://github.com/cheng-kang/wildfire",
       "license": "MIT",
       "keywords": ["wildfire", "comments", "blog"],
       "featured": false,
-      "versions": "all",
+      "versions": "latest-8",
       "include": [
         "**/*.js",
         "**/*.mjs",
@@ -142,7 +142,7 @@
       "license": "MIT",
       "keywords": ["twikoo", "comments", "blog"],
       "featured": true,
-      "versions": "all",
+      "versions": "latest-8",
       "include": [
         "**/*.js",
         "**/*.mjs"
@@ -156,7 +156,7 @@
       "license": "Apache-2.0",
       "keywords": ["mathjax", "math", "latex", "formula"],
       "featured": true,
-      "versions": "all",
+      "versions": "latest-8",
       "include": [
         "es5/**/*.js",
         "**/*.js",
@@ -171,7 +171,7 @@
       "license": "MIT",
       "keywords": ["katex", "math", "latex", "css", "js"],
       "featured": true,
-      "versions": "all",
+      "versions": "latest-8",
       "include": [
         "**/*.css",
         "**/*.js",
@@ -186,7 +186,7 @@
       "license": "MIT",
       "keywords": ["mermaid", "diagram", "flowchart", "sequence"],
       "featured": true,
-      "versions": "all",
+      "versions": "latest-8",
       "include": [
         "**/*.js",
         "**/*.mjs",
@@ -201,7 +201,7 @@
       "license": "Unknown",
       "keywords": ["busuanzi", "counter", "analytics", "blog"],
       "featured": false,
-      "versions": "all",
+      "versions": "latest-8",
       "include": [
         "**/*.js"
       ]
@@ -214,7 +214,7 @@
       "license": "MIT",
       "keywords": ["artitalk", "blog", "talk", "widget"],
       "featured": false,
-      "versions": "all",
+      "versions": "latest-8",
       "include": [
         "**/*.js",
         "**/*.mjs",
@@ -229,7 +229,7 @@
       "license": "MIT",
       "keywords": ["jquery", "javascript", "dom", "library"],
       "featured": true,
-      "versions": "all",
+      "versions": "latest-8",
       "include": [
         "dist/**/*.js"
       ]
@@ -242,7 +242,7 @@
       "license": "GPL-3.0",
       "keywords": ["fancybox", "lightbox", "gallery", "css", "js"],
       "featured": false,
-      "versions": "all",
+      "versions": "latest-8",
       "include": [
         "**/*.css",
         "**/*.js",
