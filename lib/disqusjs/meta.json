@@ -1,0 +1,10 @@
+{
+  "name": "disqusjs",
+  "title": "DisqusJS",
+  "description": "DisqusJS 评论系统样式与脚本。",
+  "keywords": ["disqus", "comments", "disqusjs"],
+  "license": "MIT",
+  "homepage": "https://github.com/SukkaW/DisqusJS",
+  "featured": false,
+  "latestVersion": "3.0.0"
+}

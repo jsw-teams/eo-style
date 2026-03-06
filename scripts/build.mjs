@@ -10,9 +10,31 @@ const dataDir = path.join(distDir, "data");
 const librariesPageDir = path.join(distDir, "libraries");
 const configPath = path.join(rootDir, "site.config.json");
 
+function normalizeSlashes(p) {
+  return p.replace(/\\/g, "/");
+}
+
 async function readJson(filePath) {
-  const raw = await fs.readFile(filePath, "utf8");
-  return JSON.parse(raw);
+  let raw = "";
+  try {
+    raw = await fs.readFile(filePath, "utf8");
+  } catch (err) {
+    throw new Error(`读取 JSON 文件失败: ${normalizeSlashes(path.relative(rootDir, filePath))}\n${err.message}`);
+  }
+
+  const trimmed = String(raw).trim();
+
+  if (!trimmed) {
+    throw new Error(`JSON 文件为空: ${normalizeSlashes(path.relative(rootDir, filePath))}`);
+  }
+
+  try {
+    return JSON.parse(trimmed);
+  } catch (err) {
+    throw new Error(
+      `JSON 解析失败: ${normalizeSlashes(path.relative(rootDir, filePath))}\n${err.message}`
+    );
+  }
 }
 
 function escapeHtml(str = "") {
@@ -22,10 +44,6 @@ function escapeHtml(str = "") {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
-}
-
-function normalizeSlashes(p) {
-  return p.replace(/\\/g, "/");
 }
 
 function ensureLeadingSlash(p) {
