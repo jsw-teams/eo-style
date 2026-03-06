@@ -1,0 +1,14 @@
+{
+  "name": "wildfire",
+  "title": "Wildfire",
+  "description": "Wildfire 静态资源镜像",
+  "keywords": [
+    "wildfire",
+    "comments",
+    "blog"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/cheng-kang/wildfire",
+  "featured": false,
+  "latestVersion": "0.3.9"
+}

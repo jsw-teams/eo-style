@@ -1,0 +1,15 @@
+{
+  "name": "artitalk",
+  "title": "Artitalk",
+  "description": "Artitalk 静态资源镜像",
+  "keywords": [
+    "artitalk",
+    "blog",
+    "talk",
+    "widget"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ArtitalkJS/Artitalk",
+  "featured": false,
+  "latestVersion": "3.3.4"
+}

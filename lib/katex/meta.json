@@ -1,0 +1,16 @@
+{
+  "name": "katex",
+  "title": "KaTeX",
+  "description": "KaTeX 静态资源镜像",
+  "keywords": [
+    "katex",
+    "math",
+    "latex",
+    "css",
+    "js"
+  ],
+  "license": "MIT",
+  "homepage": "https://katex.org/",
+  "featured": true,
+  "latestVersion": "0.16.35"
+}

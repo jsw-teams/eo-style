@@ -1,0 +1,14 @@
+{
+  "name": "twikoo",
+  "title": "Twikoo",
+  "description": "Twikoo 静态资源镜像",
+  "keywords": [
+    "twikoo",
+    "comments",
+    "blog"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/imaegoo/twikoo",
+  "featured": true,
+  "latestVersion": "1.7.1"
+}

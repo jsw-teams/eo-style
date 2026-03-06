@@ -1,0 +1,15 @@
+{
+  "name": "jquery",
+  "title": "jQuery",
+  "description": "jQuery 静态资源镜像",
+  "keywords": [
+    "jquery",
+    "javascript",
+    "dom",
+    "library"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/jquery/jquery",
+  "featured": true,
+  "latestVersion": "4.0.0-rc.2"
+}

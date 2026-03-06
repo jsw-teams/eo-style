@@ -1,0 +1,16 @@
+{
+  "name": "fancybox",
+  "title": "Fancybox",
+  "description": "Fancybox 静态资源镜像",
+  "keywords": [
+    "fancybox",
+    "lightbox",
+    "gallery",
+    "css",
+    "js"
+  ],
+  "license": "GPL-3.0",
+  "homepage": "https://github.com/fancyapps/fancybox",
+  "featured": false,
+  "latestVersion": "3.5.7"
+}

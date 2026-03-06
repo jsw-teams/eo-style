@@ -1,0 +1,15 @@
+{
+  "name": "mermaid",
+  "title": "Mermaid",
+  "description": "Mermaid 静态资源镜像",
+  "keywords": [
+    "mermaid",
+    "diagram",
+    "flowchart",
+    "sequence"
+  ],
+  "license": "MIT",
+  "homepage": "https://mermaid-js.github.io/",
+  "featured": true,
+  "latestVersion": "11.12.3"
+}

@@ -1,0 +1,15 @@
+{
+  "name": "busuanzi",
+  "title": "Busuanzi",
+  "description": "Busuanzi 静态资源镜像",
+  "keywords": [
+    "busuanzi",
+    "counter",
+    "analytics",
+    "blog"
+  ],
+  "license": "Unknown",
+  "homepage": "https://busuanzi.ibruce.info/",
+  "featured": false,
+  "latestVersion": "1.0.3"
+}
