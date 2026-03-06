@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>EO Pages 前端静态库镜像站</title>
+  <meta name="description" content="面向中国大陆访问优化的精选型前端静态库镜像站，提供常见 CSS / JavaScript 静态资源直链引用。">
+  <meta name="keywords" content="EO Pages, 前端静态库, CSS, JavaScript, 镜像站, 本地搜索">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="brand-row">
+        <a class="brand" href="/">EO Pages 前端静态库镜像站</a>
+        <a class="header-link" id="formLink" href="#" target="_blank" rel="noopener">提交收录申请</a>
+      </div>
+      <p class="site-desc">
+        面向中国大陆访问优化的精选型前端静态库镜像站。纯静态部署，本地搜索，不依赖 function、数据库或服务端接口。
+      </p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <h1>精选型前端静态库镜像站</h1>
+      <p>
+        本站用于托管常见 CSS / JavaScript 静态资源，适合在 EO Pages 上以纯静态方式部署。
+        所有库数据由构建阶段自动扫描 <code>lib/</code> 目录生成。
+      </p>
+
+      <div class="usage-box">
+        <h2>使用方法</h2>
+        <ol>
+          <li>在搜索框中查找需要的库。</li>
+          <li>进入详情页查看可引用文件、版本列表和复制示例。</li>
+          <li>直接复制 <code>link</code> / <code>script</code> 标签到你的项目中。</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="search-bar">
+        <label class="sr-only" for="searchInput">搜索库名称、关键词或描述</label>
+        <input id="searchInput" type="search" placeholder="搜索库名称、关键词或描述，例如：vue、tailwind、chart">
+      </div>
+      <div id="searchMeta" class="search-meta">正在加载搜索索引…</div>
+      <div id="searchResults" class="card-grid"></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <h2>热门推荐</h2>
+        <a href="#allLibraries">查看全部</a>
+      </div>
+      <div id="featuredLibraries" class="card-grid"></div>
+    </section>
+
+    <section class="panel" id="allLibraries">
+      <div class="section-head">
+        <h2>全部库</h2>
+        <span id="libraryCount" class="muted">0 个库</span>
+      </div>
+      <div id="allLibraryList" class="card-grid"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p id="footerText">静态资源信息由构建脚本自动生成。</p>
+    </div>
+  </footer>
+
+  <script src="/assets/app.js" defer></script>
+</body>
+</html>

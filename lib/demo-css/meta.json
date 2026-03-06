@@ -1,0 +1,10 @@
+{
+  "name": "demo-css",
+  "title": "Demo CSS",
+  "description": "示例 CSS 库，用于演示 EO Pages 前端静态库镜像站的构建流程。",
+  "keywords": ["css", "demo", "style", "example"],
+  "license": "MIT",
+  "homepage": "https://example.com/demo-css",
+  "featured": true,
+  "latestVersion": "1.0.0"
+}

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{SEO_TITLE}}</title>
+  <meta name="description" content="{{SEO_DESCRIPTION}}">
+  <meta name="keywords" content="{{SEO_KEYWORDS}}">
+  <link rel="canonical" href="{{CANONICAL_URL}}">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/style.css">
+  <script type="application/ld+json">{{JSON_LD}}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="brand-row">
+        <a class="brand" href="{{HOME_PATH}}">{{SITE_NAME}}</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <div class="breadcrumb">
+        <a href="{{HOME_PATH}}">首页</a> / <span>{{LIB_NAME}}</span>
+      </div>
+
+      <h1>{{PAGE_TITLE}}</h1>
+      <p>{{LIB_DESCRIPTION}}</p>
+
+      <dl class="info-grid">
+        <dt>库名称</dt>
+        <dd><code>{{LIB_NAME}}</code></dd>
+
+        <dt>官网</dt>
+        <dd><a href="{{LIB_HOMEPAGE}}" target="_blank" rel="noopener">{{LIB_HOMEPAGE}}</a></dd>
+
+        <dt>许可证</dt>
+        <dd>{{LIB_LICENSE}}</dd>
+
+        <dt>最新版本</dt>
+        <dd><code>{{LIB_LATEST_VERSION}}</code></dd>
+
+        <dt>关键词</dt>
+        <dd>{{LIB_KEYWORDS_HTML}}</dd>
+
+        <dt>所有版本</dt>
+        <dd>
+          <ul>
+            {{LIB_VERSIONS_HTML}}
+          </ul>
+        </dd>
+      </dl>
+    </section>
+
+    <section class="panel">
+      <h2>可直接复制的引用示例</h2>
+
+      <h3>CSS 示例</h3>
+      <pre class="code-block"><code>{{CSS_EXAMPLE}}</code></pre>
+
+      <h3>JavaScript 示例</h3>
+      <pre class="code-block"><code>{{JS_EXAMPLE}}</code></pre>
+    </section>
+
+    <section class="panel">
+      <h2>文件列表</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>版本</th>
+              <th>文件路径</th>
+              <th>直链地址</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{LIB_FILE_ROWS}}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p><a href="{{HOME_PATH}}">返回首页</a></p>
+    </div>
+  </footer>
+</body>
+</html>

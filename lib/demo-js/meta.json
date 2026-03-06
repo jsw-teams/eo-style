@@ -1,0 +1,10 @@
+{
+  "name": "demo-js",
+  "title": "Demo JS",
+  "description": "示例 JavaScript 库，用于演示本地搜索、详情页生成和版本扫描。",
+  "keywords": ["javascript", "demo", "utility", "example"],
+  "license": "MIT",
+  "homepage": "https://example.com/demo-js",
+  "featured": true,
+  "latestVersion": "2.1.0"
+}
