@@ -38,7 +38,7 @@
         <dd>{{LIB_LICENSE}}</dd>
 
         <dt>最新版本</dt>
-        <dd><code id="latestVersionText">{{LIB_LATEST_VERSION}}</code></dd>
+        <dd><code>{{LIB_LATEST_VERSION}}</code></dd>
 
         <dt>关键词</dt>
         <dd>{{LIB_KEYWORDS_HTML}}</dd>
@@ -95,6 +95,7 @@
       try {
         pageData = JSON.parse(dataEl.textContent || "{}");
       } catch (e) {
+        console.error("pageData parse failed:", e);
         return;
       }
 
@@ -126,7 +127,7 @@
 
         var jsExample = jsFiles[0]
           ? '<script src="' + siteUrl + jsFiles[0].urlPath + '"><\/script>'
-          : "暂无 JS 引用示例";
+          : "暂无 JavaScript 引用示例";
 
         cssExampleEl.textContent = cssExample;
         jsExampleEl.textContent = jsExample;

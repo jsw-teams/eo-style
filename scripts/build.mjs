@@ -279,7 +279,7 @@ async function generateLibraryPages({ libraries, template, config }) {
       CSS_EXAMPLE: escapeHtml(cssExample || "暂无 CSS 引用示例"),
       JS_EXAMPLE: escapeHtml(jsExample || "暂无 JS 引用示例"),
       JSON_LD: escapeHtml(jsonLd),
-      PAGE_DATA_JSON: escapeHtml(JSON.stringify(pageData)),
+      PAGE_DATA_JSON: JSON.stringify(pageData).replace(/<\/script/gi, "<\\/script"),
       HOME_PATH: "/"
     });
 

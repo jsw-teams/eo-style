@@ -1,6 +1,6 @@
 {
   "siteUrl": "https://style-mirror.jsw.ac.cn",
-  "siteName": "EO Pages 前端静态库镜像站",
+  "siteName": "静态库镜像",
   "formUrl": "https://YOUR-FORM-URL.example",
   "deploy": {
     "defaultKeepVersions": 3,

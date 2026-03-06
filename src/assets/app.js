@@ -87,9 +87,7 @@ async function main() {
   if (siteConfig?.siteName) {
     document.title = siteConfig.siteName;
     const brand = document.getElementById("brand");
-    const heroTitle = document.getElementById("heroTitle");
     if (brand) brand.textContent = siteConfig.siteName;
-    if (heroTitle) heroTitle.textContent = siteConfig.siteName;
   }
 
   const formLink = document.getElementById("formLink");
