@@ -168,28 +168,6 @@ function buildSnippetExamples(latestFiles, siteUrl) {
   return { cssExample, jsExample };
 }
 
-function renderListItems(items) {
-  if (!items.length) return `<li>暂无</li>`;
-  return items.map((item) => `<li>${item}</li>`).join("\n");
-}
-
-function renderFileTableRows(files, siteUrl) {
-  if (!files.length) {
-    return `<tr><td colspan="3">暂无文件</td></tr>`;
-  }
-
-  return files.map((file) => {
-    const fullUrl = joinUrl(siteUrl, file.urlPath);
-    return `
-      <tr>
-        <td><code>${escapeHtml(file.version)}</code></td>
-        <td><code>${escapeHtml(file.relativePath)}</code></td>
-        <td><a href="${escapeHtml(fullUrl)}">${escapeHtml(fullUrl)}</a></td>
-      </tr>
-    `;
-  }).join("\n");
-}
-
 function replaceTokens(template, tokens) {
   let output = template;
   for (const [key, value] of Object.entries(tokens)) {
@@ -198,20 +176,62 @@ function replaceTokens(template, tokens) {
   return output;
 }
 
+function getKeepVersionsForLibrary(config, name) {
+  const defaultKeep = Number(config?.deploy?.defaultKeepVersions || 3);
+  const libraryKeep = Number(config?.deploy?.libraries?.[name]);
+  return Number.isFinite(libraryKeep) && libraryKeep > 0 ? libraryKeep : defaultKeep;
+}
+
+function selectDeployVersions(versionNames, keepCount) {
+  return [...versionNames]
+    .sort(compareVersionsDesc)
+    .slice(0, keepCount);
+}
+
+function renderVersionOptions(versions, selectedVersion) {
+  return versions.map((v) => {
+    const sel = v.version === selectedVersion ? " selected" : "";
+    return `<option value="${escapeHtml(v.version)}"${sel}>${escapeHtml(v.version)}</option>`;
+  }).join("");
+}
+
+function renderFileTableRows(files, siteUrl) {
+  if (!files.length) {
+    return `<tr><td colspan="2">暂无文件</td></tr>`;
+  }
+
+  return files.map((file) => {
+    const fullUrl = joinUrl(siteUrl, file.urlPath);
+    return `
+      <tr>
+        <td><code>${escapeHtml(file.relativePath)}</code></td>
+        <td><a href="${escapeHtml(fullUrl)}">${escapeHtml(fullUrl)}</a></td>
+      </tr>
+    `;
+  }).join("\n");
+}
+
+async function copySelectedLibFiles(libraries) {
+  for (const lib of libraries) {
+    for (const version of lib.versions) {
+      const srcVersionDir = path.join(libDir, lib.name, version.version);
+      const destVersionDir = path.join(distDir, "lib", lib.name, version.version);
+      if (existsSync(srcVersionDir)) {
+        await copyDir(srcVersionDir, destVersionDir);
+      }
+    }
+  }
+}
+
 async function generateLibraryPages({ libraries, template, config }) {
   for (const lib of libraries) {
     const libraryDir = path.join(librariesPageDir, lib.name);
     await ensureDir(libraryDir);
 
-    const latestVersionObj = lib.versions.find((v) => v.version === lib.latestVersion);
+    const latestVersionObj = lib.versions.find((v) => v.version === lib.latestVersion) || lib.versions[0];
     const latestFiles = latestVersionObj ? latestVersionObj.files : [];
     const { cssExample, jsExample } = buildSnippetExamples(latestFiles, config.siteUrl);
 
-    const versionsHtml = renderListItems(
-      lib.versions.map((v) => `<code>${escapeHtml(v.version)}</code>（${v.files.length} 个文件）`)
-    );
-
-    const fileTableRows = renderFileTableRows(lib.files, config.siteUrl);
     const keywordsHtml = lib.keywords.length
       ? lib.keywords.map((k) => `<span class="tag">${escapeHtml(k)}</span>`).join(" ")
       : `<span class="tag">暂无关键词</span>`;
@@ -230,6 +250,17 @@ async function generateLibraryPages({ libraries, template, config }) {
       keywords: lib.keywords || []
     });
 
+    const versionOptions = renderVersionOptions(lib.versions, latestVersionObj?.version || "");
+    const initialFileRows = renderFileTableRows(latestFiles, config.siteUrl);
+    const pageData = {
+      siteUrl: config.siteUrl,
+      latestVersion: lib.latestVersion,
+      versions: lib.versions.map((v) => ({
+        version: v.version,
+        files: v.files
+      }))
+    };
+
     const html = replaceTokens(template, {
       SEO_TITLE: seoTitle,
       SEO_DESCRIPTION: seoDescription,
@@ -243,11 +274,12 @@ async function generateLibraryPages({ libraries, template, config }) {
       LIB_LICENSE: escapeHtml(lib.license || "未知"),
       LIB_LATEST_VERSION: escapeHtml(lib.latestVersion || "未知"),
       LIB_KEYWORDS_HTML: keywordsHtml,
-      LIB_VERSIONS_HTML: versionsHtml,
-      LIB_FILE_ROWS: fileTableRows,
+      VERSION_OPTIONS: versionOptions,
+      INITIAL_FILE_ROWS: initialFileRows,
       CSS_EXAMPLE: escapeHtml(cssExample || "暂无 CSS 引用示例"),
       JS_EXAMPLE: escapeHtml(jsExample || "暂无 JS 引用示例"),
       JSON_LD: escapeHtml(jsonLd),
+      PAGE_DATA_JSON: escapeHtml(JSON.stringify(pageData)),
       HOME_PATH: "/"
     });
 
@@ -277,7 +309,7 @@ ${items}
 `;
 }
 
-async function scanLibraries() {
+async function scanLibraries(config) {
   if (!existsSync(libDir)) return [];
 
   const entries = await fs.readdir(libDir, { withFileTypes: true });
@@ -291,21 +323,23 @@ async function scanLibraries() {
     const metaPath = path.join(libraryRoot, "meta.json");
 
     if (!existsSync(metaPath)) {
-      throw new Error(`缺少元数据文件: ${normalizeSlashes(path.relative(rootDir, metaPath))}`);
+      console.warn(`Skip library without meta.json: ${normalizeSlashes(path.relative(rootDir, libraryRoot))}`);
+      continue;
     }
 
     const meta = await readJson(metaPath);
     const dirEntries = await fs.readdir(libraryRoot, { withFileTypes: true });
     const versionNames = dirEntries
       .filter((d) => d.isDirectory() && isVersionDirName(d.name))
-      .map((d) => d.name)
-      .sort(compareVersionsDesc);
+      .map((d) => d.name);
 
-    const latestVersion = pickLatestVersion(meta, versionNames);
+    const keepCount = getKeepVersionsForLibrary(config, name);
+    const deployVersions = selectDeployVersions(versionNames, keepCount);
+
     const versions = [];
     const allFiles = [];
 
-    for (const version of versionNames) {
+    for (const version of deployVersions) {
       const versionDir = path.join(libraryRoot, version);
       const files = await walkFiles(versionDir, versionDir);
 
@@ -322,6 +356,8 @@ async function scanLibraries() {
       versions.push({ version, files: mappedFiles });
       allFiles.push(...mappedFiles);
     }
+
+    const latestVersion = pickLatestVersion(meta, deployVersions);
 
     libraries.push({
       name: meta.name || name,
@@ -363,11 +399,9 @@ async function main() {
     }
   }
 
-  if (existsSync(libDir)) {
-    await copyDir(libDir, path.join(distDir, "lib"));
-  }
+  const libraries = await scanLibraries(config);
+  await copySelectedLibFiles(libraries);
 
-  const libraries = await scanLibraries();
   const searchIndex = buildSearchIndex(libraries);
 
   await fs.writeFile(
@@ -382,17 +416,13 @@ async function main() {
 
   await fs.writeFile(
     path.join(dataDir, "libraries.json"),
-    JSON.stringify({
-      libraries
-    }, null, 2),
+    JSON.stringify({ libraries }, null, 2),
     "utf8"
   );
 
   await fs.writeFile(
     path.join(dataDir, "search.json"),
-    JSON.stringify({
-      items: searchIndex
-    }, null, 2),
+    JSON.stringify({ items: searchIndex }, null, 2),
     "utf8"
   );
 
@@ -420,8 +450,10 @@ async function main() {
     "utf8"
   );
 
+  const distFiles = await walkFiles(distDir, distDir);
   console.log("Build completed.");
   console.log(`Libraries: ${libraries.length}`);
+  console.log(`Dist files: ${distFiles.length}`);
   console.log(`Output: ${distDir}`);
 }
 

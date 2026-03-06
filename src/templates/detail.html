@@ -38,16 +38,16 @@
         <dd>{{LIB_LICENSE}}</dd>
 
         <dt>最新版本</dt>
-        <dd><code>{{LIB_LATEST_VERSION}}</code></dd>
+        <dd><code id="latestVersionText">{{LIB_LATEST_VERSION}}</code></dd>
 
         <dt>关键词</dt>
         <dd>{{LIB_KEYWORDS_HTML}}</dd>
 
-        <dt>所有版本</dt>
+        <dt>选择版本</dt>
         <dd>
-          <ul>
-            {{LIB_VERSIONS_HTML}}
-          </ul>
+          <select id="versionSelect" class="version-select">
+            {{VERSION_OPTIONS}}
+          </select>
         </dd>
       </dl>
     </section>
@@ -56,10 +56,10 @@
       <h2>引用示例</h2>
 
       <h3>CSS</h3>
-      <pre class="code-block"><code>{{CSS_EXAMPLE}}</code></pre>
+      <pre class="code-block"><code id="cssExample">{{CSS_EXAMPLE}}</code></pre>
 
       <h3>JavaScript</h3>
-      <pre class="code-block"><code>{{JS_EXAMPLE}}</code></pre>
+      <pre class="code-block"><code id="jsExample">{{JS_EXAMPLE}}</code></pre>
     </section>
 
     <section class="panel">
@@ -68,17 +68,90 @@
         <table>
           <thead>
             <tr>
-              <th>版本</th>
               <th>文件路径</th>
               <th>直链地址</th>
             </tr>
           </thead>
-          <tbody>
-            {{LIB_FILE_ROWS}}
+          <tbody id="fileTableBody">
+            {{INITIAL_FILE_ROWS}}
           </tbody>
         </table>
       </div>
     </section>
   </main>
+
+  <script id="pageData" type="application/json">{{PAGE_DATA_JSON}}</script>
+  <script>
+    (function () {
+      var dataEl = document.getElementById("pageData");
+      var selectEl = document.getElementById("versionSelect");
+      var fileBodyEl = document.getElementById("fileTableBody");
+      var cssExampleEl = document.getElementById("cssExample");
+      var jsExampleEl = document.getElementById("jsExample");
+
+      if (!dataEl || !selectEl || !fileBodyEl || !cssExampleEl || !jsExampleEl) return;
+
+      var pageData;
+      try {
+        pageData = JSON.parse(dataEl.textContent || "{}");
+      } catch (e) {
+        return;
+      }
+
+      var versionMap = new Map(
+        (pageData.versions || []).map(function (v) {
+          return [v.version, v.files || []];
+        })
+      );
+
+      var siteUrl = String(pageData.siteUrl || "").replace(/\/$/, "");
+
+      function esc(str) {
+        return String(str)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#39;");
+      }
+
+      function render(version) {
+        var files = versionMap.get(version) || [];
+        var cssFiles = files.filter(function (f) { return f.type === "css"; });
+        var jsFiles = files.filter(function (f) { return f.type === "js"; });
+
+        var cssExample = cssFiles[0]
+          ? '<link rel="stylesheet" href="' + siteUrl + cssFiles[0].urlPath + '">'
+          : "暂无 CSS 引用示例";
+
+        var jsExample = jsFiles[0]
+          ? '<script src="' + siteUrl + jsFiles[0].urlPath + '"><\/script>'
+          : "暂无 JS 引用示例";
+
+        cssExampleEl.textContent = cssExample;
+        jsExampleEl.textContent = jsExample;
+
+        if (!files.length) {
+          fileBodyEl.innerHTML = '<tr><td colspan="2">暂无文件</td></tr>';
+          return;
+        }
+
+        fileBodyEl.innerHTML = files.map(function (file) {
+          var fullUrl = siteUrl + file.urlPath;
+          return ''
+            + '<tr>'
+            + '<td><code>' + esc(file.relativePath) + '</code></td>'
+            + '<td><a href="' + esc(fullUrl) + '">' + esc(fullUrl) + '</a></td>'
+            + '</tr>';
+        }).join("");
+      }
+
+      render(selectEl.value);
+
+      selectEl.addEventListener("change", function () {
+        render(selectEl.value);
+      });
+    })();
+  </script>
 </body>
 </html>
