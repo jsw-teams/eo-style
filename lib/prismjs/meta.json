@@ -1,0 +1,10 @@
+{
+  "name": "prismjs",
+  "title": "Prism.js",
+  "description": "Prism.js 代码高亮主题样式资源。",
+  "keywords": ["prismjs", "prism", "highlight", "code", "css"],
+  "license": "MIT",
+  "homepage": "https://prismjs.com/",
+  "featured": true,
+  "latestVersion": "1.21.0"
+}

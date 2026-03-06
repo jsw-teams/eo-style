@@ -1,0 +1,10 @@
+{
+  "name": "twikoo",
+  "title": "Twikoo",
+  "description": "Twikoo 评论系统脚本。",
+  "keywords": ["twikoo", "comments", "blog"],
+  "license": "MIT",
+  "homepage": "https://github.com/imaegoo/twikoo",
+  "featured": true,
+  "latestVersion": "0.3.2"
+}

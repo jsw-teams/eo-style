@@ -1,0 +1,10 @@
+{
+  "name": "minivaline",
+  "title": "MiniValine",
+  "description": "MiniValine 评论系统脚本。",
+  "keywords": ["minivaline", "comments", "blog"],
+  "license": "MIT",
+  "homepage": "https://github.com/MiniValine/MiniValine",
+  "featured": false,
+  "latestVersion": "2.7.5"
+}

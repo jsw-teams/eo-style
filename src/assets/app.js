@@ -56,7 +56,6 @@ function scoreItem(item, keyword) {
   const keywords = (item.keywords || []).map(normalizeText);
 
   let score = 0;
-
   if (name === q) score += 100;
   if (title === q) score += 90;
   if (name.includes(q)) score += 60;
@@ -82,28 +81,36 @@ function searchItems(items, keyword) {
 }
 
 async function main() {
-  const [librariesPayload, searchPayload, configPayload] = await Promise.all([
+  const [siteConfig, librariesPayload, searchPayload] = await Promise.all([
+    fetchJson("/data/site.json"),
     fetchJson("/data/libraries.json"),
-    fetchJson("/data/search.json"),
-    fetch("/site.config.json", { cache: "no-store" }).then(async (res) => {
-      if (!res.ok) return null;
-      return res.json();
-    }).catch(() => null)
+    fetchJson("/data/search.json")
   ]);
+
+  if (siteConfig?.siteName) {
+    document.title = siteConfig.siteName;
+    const brand = document.querySelector(".brand");
+    if (brand) brand.textContent = siteConfig.siteName;
+  }
+
+  if (siteConfig?.siteDescription) {
+    const desc = document.getElementById("siteDesc");
+    if (desc) desc.textContent = siteConfig.siteDescription;
+  }
+
+  const formLink = document.getElementById("formLink");
+  if (formLink && siteConfig?.formUrl) {
+    formLink.href = siteConfig.formUrl;
+  }
+
+  const footerText = document.getElementById("footerText");
+  if (footerText && siteConfig?.footerText) {
+    footerText.textContent = siteConfig.footerText;
+  }
 
   const libraries = librariesPayload.libraries || [];
   const searchItemsData = searchPayload.items || [];
   const featured = libraries.filter(lib => lib.featured);
-
-  const formLink = document.getElementById("formLink");
-  const footerText = document.getElementById("footerText");
-
-  if (configPayload?.formUrl && formLink) {
-    formLink.href = configPayload.formUrl;
-  }
-  if (configPayload?.footerText && footerText) {
-    footerText.textContent = configPayload.footerText;
-  }
 
   setHtml(
     "featuredLibraries",
@@ -130,6 +137,7 @@ async function main() {
 
   function renderSearch(keyword) {
     const result = searchItems(searchItemsData, keyword);
+
     if (searchMeta) {
       searchMeta.textContent = keyword
         ? `搜索“${keyword}”共匹配 ${result.length} 项`
@@ -169,6 +177,6 @@ main().catch((err) => {
   console.error(err);
   const meta = document.getElementById("searchMeta");
   if (meta) {
-    meta.textContent = "加载失败，请检查 data/libraries.json 与 data/search.json 是否已正确生成。";
+    meta.textContent = "加载失败，请检查 /data/site.json、/data/libraries.json、/data/search.json 是否已正确生成。";
   }
 });

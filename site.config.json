@@ -1,15 +1,15 @@
 {
-  "siteUrl": "https://style.jsw.ac.cn",
+  "siteUrl": "https://style-mirror.jsw.ac.cn",
   "siteName": "EO Pages 前端静态库镜像站",
   "siteDescription": "面向中国大陆访问优化的精选型前端静态库镜像站，提供常见 CSS / JavaScript 静态资源直链引用。",
   "siteKeywords": [
     "EO Pages",
     "前端静态库",
-    "CDN 镜像",
     "JavaScript",
     "CSS",
-    "大陆访问优化"
+    "镜像站",
+    "本地搜索"
   ],
   "formUrl": "https://YOUR-FORM-URL.example",
-  "footerText": "请将 YOUR-DOMAIN.example 和 YOUR-FORM-URL.example 替换为你的真实配置。"
+  "footerText": "本站为纯静态镜像站示例，库清单、搜索索引、详情页与 sitemap 均由构建阶段自动生成。"
 }

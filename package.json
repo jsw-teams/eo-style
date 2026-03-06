@@ -1,12 +1,11 @@
 {
   "name": "eo-pages-static-lib-mirror",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "Pure static frontend library mirror for EO Pages",
   "type": "module",
   "scripts": {
-    "build": "node scripts/build.mjs",
-    "dev:build": "node scripts/build.mjs"
+    "build": "node scripts/build.mjs"
   },
   "engines": {
     "node": ">=18"

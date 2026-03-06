@@ -1,0 +1,10 @@
+{
+  "name": "artitalk",
+  "title": "Artitalk",
+  "description": "Artitalk 微博客/说说组件脚本。",
+  "keywords": ["artitalk", "blog", "talk", "widget"],
+  "license": "MIT",
+  "homepage": "https://github.com/ArtitalkJS/Artitalk",
+  "featured": false,
+  "latestVersion": "3.1.2"
+}

@@ -1,0 +1,10 @@
+{
+  "name": "busuanzi",
+  "title": "Busuanzi",
+  "description": "Busuanzi 站点统计脚本。",
+  "keywords": ["busuanzi", "counter", "analytics", "blog"],
+  "license": "Unknown",
+  "homepage": "https://busuanzi.ibruce.info/",
+  "featured": false,
+  "latestVersion": "2.3.0"
+}

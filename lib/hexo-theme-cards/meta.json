@@ -1,0 +1,10 @@
+{
+  "name": "hexo-theme-cards",
+  "title": "Hexo Theme Cards",
+  "description": "Hexo Theme Cards 主题相关样式与配套脚本，包含 main style、darkmode、highlight、back to top、local search 等。",
+  "keywords": ["hexo", "theme", "cards", "style", "darkmode", "local-search", "b2t"],
+  "license": "MIT",
+  "homepage": "https://github.com/zchengsite/hexo-theme-cards",
+  "featured": true,
+  "latestVersion": "1.4"
+}

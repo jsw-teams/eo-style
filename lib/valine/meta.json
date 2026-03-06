@@ -1,0 +1,10 @@
+{
+  "name": "valine",
+  "title": "Valine",
+  "description": "Valine 评论系统脚本。",
+  "keywords": ["valine", "comments", "blog"],
+  "license": "MIT",
+  "homepage": "https://github.com/xCss/Valine",
+  "featured": false,
+  "latestVersion": "1.4.14"
+}

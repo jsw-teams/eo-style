@@ -1,0 +1,10 @@
+{
+  "name": "fancybox",
+  "title": "Fancybox",
+  "description": "Fancybox 图片灯箱样式与脚本。",
+  "keywords": ["fancybox", "lightbox", "gallery", "css", "js"],
+  "license": "GPL-3.0",
+  "homepage": "https://github.com/fancyapps/fancybox",
+  "featured": false,
+  "latestVersion": "3.5.7"
+}

@@ -1,0 +1,10 @@
+{
+  "name": "vanilla-lazyload",
+  "title": "vanilla-lazyload",
+  "description": "Lazyload 图片与资源懒加载脚本。",
+  "keywords": ["lazyload", "image", "performance", "frontend"],
+  "license": "MIT",
+  "homepage": "https://github.com/verlok/vanilla-lazyload",
+  "featured": false,
+  "latestVersion": "17.1.2"
+}

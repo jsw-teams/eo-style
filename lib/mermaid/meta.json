@@ -1,0 +1,10 @@
+{
+  "name": "mermaid",
+  "title": "Mermaid",
+  "description": "Mermaid 图表渲染脚本。",
+  "keywords": ["mermaid", "diagram", "flowchart", "sequence"],
+  "license": "MIT",
+  "homepage": "https://mermaid-js.github.io/",
+  "featured": true,
+  "latestVersion": "8.10.2"
+}

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>EO Pages 前端静态库镜像站</title>
   <meta name="description" content="面向中国大陆访问优化的精选型前端静态库镜像站，提供常见 CSS / JavaScript 静态资源直链引用。">
-  <meta name="keywords" content="EO Pages, 前端静态库, CSS, JavaScript, 镜像站, 本地搜索">
+  <meta name="keywords" content="EO Pages, 前端静态库, JavaScript, CSS, 镜像站, 本地搜索">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/style.css">
 </head>
@@ -16,7 +16,7 @@
         <a class="brand" href="/">EO Pages 前端静态库镜像站</a>
         <a class="header-link" id="formLink" href="#" target="_blank" rel="noopener">提交收录申请</a>
       </div>
-      <p class="site-desc">
+      <p class="site-desc" id="siteDesc">
         面向中国大陆访问优化的精选型前端静态库镜像站。纯静态部署，本地搜索，不依赖 function、数据库或服务端接口。
       </p>
     </div>
@@ -43,7 +43,7 @@
     <section class="panel">
       <div class="search-bar">
         <label class="sr-only" for="searchInput">搜索库名称、关键词或描述</label>
-        <input id="searchInput" type="search" placeholder="搜索库名称、关键词或描述，例如：vue、tailwind、chart">
+        <input id="searchInput" type="search" placeholder="搜索库名称、关键词或描述，例如：jquery、katex、mermaid">
       </div>
       <div id="searchMeta" class="search-meta">正在加载搜索索引…</div>
       <div id="searchResults" class="card-grid"></div>

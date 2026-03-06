@@ -1,0 +1,10 @@
+{
+  "name": "highlight.js",
+  "title": "highlight.js",
+  "description": "highlight.js 代码高亮主题样式资源。",
+  "keywords": ["highlight.js", "highlight", "code", "css"],
+  "license": "BSD-3-Clause",
+  "homepage": "https://highlightjs.org/",
+  "featured": true,
+  "latestVersion": "10.1.2"
+}

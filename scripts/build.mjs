@@ -8,7 +8,6 @@ const libDir = path.join(rootDir, "lib");
 const distDir = path.join(rootDir, "dist");
 const dataDir = path.join(distDir, "data");
 const librariesPageDir = path.join(distDir, "libraries");
-
 const configPath = path.join(rootDir, "site.config.json");
 
 async function readJson(filePath) {
@@ -194,9 +193,7 @@ async function generateLibraryPages({ libraries, template, config }) {
     const { cssExample, jsExample } = buildSnippetExamples(latestFiles, config.siteUrl);
 
     const versionsHtml = renderListItems(
-      lib.versions.map((v) => {
-        return `<code>${escapeHtml(v.version)}</code>（${v.files.length} 个文件）`;
-      })
+      lib.versions.map((v) => `<code>${escapeHtml(v.version)}</code>（${v.files.length} 个文件）`)
     );
 
     const fileTableRows = renderFileTableRows(lib.files, config.siteUrl);
@@ -236,7 +233,6 @@ async function generateLibraryPages({ libraries, template, config }) {
       CSS_EXAMPLE: escapeHtml(cssExample || "暂无 CSS 引用示例"),
       JS_EXAMPLE: escapeHtml(jsExample || "暂无 JS 引用示例"),
       JSON_LD: escapeHtml(jsonLd),
-      HOME_URL: escapeHtml(joinUrl(config.siteUrl, "/")),
       HOME_PATH: "/"
     });
 
@@ -252,28 +248,22 @@ function buildSearchIndex(libraries) {
     keywords: lib.keywords,
     license: lib.license,
     latestVersion: lib.latestVersion,
-    detailPage: lib.detailPage
+    detailPage: lib.detailPage,
+    featured: lib.featured
   }));
 }
 
 function buildSitemapXml(urls) {
-  const items = urls.map((url) => {
-    return `<url><loc>${escapeHtml(url)}</loc></url>`;
-  }).join("");
-
+  const items = urls.map((url) => `<url><loc>${escapeHtml(url)}</loc></url>`).join("");
   return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${items}
 </urlset>
 `;
 }
 
-async function scanLibraries(config) {
-  if (!existsSync(libDir)) {
-    return [];
-  }
+async function scanLibraries() {
+  if (!existsSync(libDir)) return [];
 
   const entries = await fs.readdir(libDir, { withFileTypes: true });
   const libraries = [];
@@ -297,7 +287,6 @@ async function scanLibraries(config) {
       .sort(compareVersionsDesc);
 
     const latestVersion = pickLatestVersion(meta, versionNames);
-
     const versions = [];
     const allFiles = [];
 
@@ -315,15 +304,11 @@ async function scanLibraries(config) {
         };
       });
 
-      versions.push({
-        version,
-        files: mappedFiles
-      });
-
+      versions.push({ version, files: mappedFiles });
       allFiles.push(...mappedFiles);
     }
 
-    const item = {
+    libraries.push({
       name: meta.name || name,
       title: meta.title || name,
       description: meta.description || "",
@@ -335,9 +320,7 @@ async function scanLibraries(config) {
       latestVersion,
       versions,
       files: allFiles
-    };
-
-    libraries.push(item);
+    });
   }
 
   libraries.sort((a, b) => a.title.localeCompare(b.title, "zh-CN"));
@@ -352,9 +335,8 @@ async function main() {
   await ensureDir(librariesPageDir);
 
   const assetsSrc = path.join(srcDir, "assets");
-  const assetsDist = path.join(distDir, "assets");
   if (existsSync(assetsSrc)) {
-    await copyDir(assetsSrc, assetsDist);
+    await copyDir(assetsSrc, path.join(distDir, "assets"));
   }
 
   const staticFiles = ["index.html", "404.html"];
@@ -370,8 +352,21 @@ async function main() {
     await copyDir(libDir, path.join(distDir, "lib"));
   }
 
-  const libraries = await scanLibraries(config);
+  const libraries = await scanLibraries();
   const searchIndex = buildSearchIndex(libraries);
+
+  await fs.writeFile(
+    path.join(dataDir, "site.json"),
+    JSON.stringify({
+      siteUrl: config.siteUrl,
+      siteName: config.siteName,
+      siteDescription: config.siteDescription,
+      siteKeywords: config.siteKeywords || [],
+      formUrl: config.formUrl || "",
+      footerText: config.footerText || ""
+    }, null, 2),
+    "utf8"
+  );
 
   await fs.writeFile(
     path.join(dataDir, "libraries.json"),
@@ -414,10 +409,13 @@ async function main() {
     })
     .filter(Boolean);
 
-  const sitemapXml = buildSitemapXml([...new Set(sitemapUrls)]);
-  await fs.writeFile(path.join(distDir, "sitemap.xml"), sitemapXml, "utf8");
+  await fs.writeFile(
+    path.join(distDir, "sitemap.xml"),
+    buildSitemapXml([...new Set(sitemapUrls)]),
+    "utf8"
+  );
 
-  console.log(`Build completed.`);
+  console.log("Build completed.");
   console.log(`Libraries: ${libraries.length}`);
   console.log(`Output: ${distDir}`);
 }

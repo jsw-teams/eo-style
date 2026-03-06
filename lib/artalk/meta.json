@@ -1,0 +1,10 @@
+{
+  "name": "artalk",
+  "title": "Artalk",
+  "description": "Artalk 评论系统样式与脚本。",
+  "keywords": ["artalk", "comments", "css", "js"],
+  "license": "MIT",
+  "homepage": "https://github.com/ArtalkJS/Artalk",
+  "featured": false,
+  "latestVersion": "1.0.6"
+}
